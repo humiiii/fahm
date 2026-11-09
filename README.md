@@ -15,6 +15,14 @@ Open the Local URL printed by Next.js, `http://127.0.0.1:3087`.
 
 The development script uses Webpack polling for reliable file watching in this local macOS environment. The production build uses the default Next.js bundler.
 
+## Quran Foundation credentials
+
+Use the ignored root-level `.env.local` file for your credentials. If it does not exist, copy `.env.example` to `.env.local`, then fill in `QF_CLIENT_ID` and `QF_CLIENT_SECRET` locally. Never paste secrets into chat or commit this file, and never prefix these names with `NEXT_PUBLIC_`. Escape any literal dollar sign in a value as `\$`, because Next.js expands environment variables.
+
+Leave `QF_ENV=prelive` for a new app. Switch to `production` only after approval and with matching production credentials. New Backend/server apps need the Client Credentials grant and approved Content read scopes; older credentials may instead hold the legacy `content` scope. See the [official quickstart](https://api-docs.quran.foundation/docs/quickstart/).
+
+This prepares configuration only; the prototype is not connected to the API yet. The first connection check will authenticate on the server and request Al-Fatihah (surah 1). Pre-live contains only surahs 1 and 2, so the Hardship & ease sample from surah 94 needs approved production access. Restart the development server after changing credentials.
+
 ## Checks
 
 ```sh
