@@ -46,7 +46,7 @@ The temporary QA server is stopped after verification. Start it with the command
 
 - Editorial and scholarly review of introductions, definitions, and thematic connections.
 - Provider access and appropriate reuse permissions before public release.
-- Live APIs, the full Quran reader, audio, offline downloads, accounts, and cross-device synchronization.
+- Displaying live provider data in the interface, the full Quran reader, audio, offline downloads, accounts, and cross-device synchronization.
 - Final name/domain clearance and public hosting.
 
 The prototype stays local and carries `noindex` metadata. No GitHub repository or public deployment was created.
@@ -54,3 +54,11 @@ The prototype stays local and carries `noindex` metadata. No GitHub repository o
 ## Recommended next milestone
 
 Review the homepage and first topic interaction with the owner, then refine the design and complete one reviewed topic with approved content sources. Integrate live providers after access and terms are settled.
+
+## Quran Foundation connection — 9 November 2026
+
+- Installed the official `@quranjs/api` SDK (3.17.2) and added a server-only Al-Fatihah fetcher. Credentials are loaded privately from the ignored `.env.local` file; the module validates the environment and scope mode before making a request.
+- `npm run quran:check`: authenticated successfully against pre-live and fetched all seven Arabic verses, ordered 1:1 through 1:7. No secrets, tokens, or fetched content were persisted by the check.
+- `npm run typecheck`: passed. `npm test`: all eight tests passed, including provider host pairing, explicit legacy scope configuration, and invalid configuration rejection.
+- `npm run build -- --webpack`: passed. The default Turbopack build hit a local worker port-permission error, including on an escalated retry; the build script remains unchanged.
+- The interface still uses the original local sample content. Live reader rendering, translations, and production approval are separate next steps. Pre-live cannot supply the Ash-Sharh topic excerpt.
