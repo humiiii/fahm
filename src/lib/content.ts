@@ -15,10 +15,10 @@ export type Source = {
 
 export const sources: Record<string, Source> = {
   'ash-sharh': {
-    id: 'ash-sharh', kind: 'Quran', title: 'Ash-Sharh · 94:5–6',
-    credit: 'Dr. Mustafa Khattab · The Clear Quran',
-    description: 'A two-verse reading excerpt. Open the original for the surrounding passage, translation notes, and complete surah.',
-    href: 'https://quran.com/en/ash-sharh/5-6',
+    id: 'ash-sharh', kind: 'Quran', title: 'Ash-Sharh · Chapter 94',
+    credit: 'Saheeh International · Quran Foundation',
+    description: 'The topic begins with verses 5–6. The complete surah, Arabic word data, and English translation are supplied by Quran Foundation. Translation notes are available at the original source.',
+    href: 'https://quran.com/94',
   },
   'muslim-2999': {
     id: 'muslim-2999', kind: 'Hadith', title: 'Sahih Muslim · 2999',
@@ -29,13 +29,13 @@ export const sources: Record<string, Source> = {
   'ibn-kathir': {
     id: 'ibn-kathir', kind: 'Commentary', title: 'Ibn Kathir (Abridged)',
     credit: 'Tafsir of Ash-Sharh · 94:1–8 · Quran.com',
-    description: 'The commentary discusses the reassurance in verses 5–6 and its repetition within the complete surah. Open the published commentary for the full explanation.',
+    description: 'Read the published explanation of Ash-Sharh 94:1–8, including the surrounding passage and the repetition in verses 5–6.',
     href: 'https://quran.com/ash-sharh/5/tafsirs/en-tafisr-ibn-kathir',
   },
   corpus: {
     id: 'corpus', kind: 'Linguistics', title: 'Quranic Arabic Corpus',
     credit: 'Kais Dukes · University of Leeds · Surah 94',
-    description: 'Word meanings and grammatical labels in this preview are referenced to the Corpus. A root connection is a linguistic relationship and does not by itself establish a thematic connection.',
+    description: 'An additional reference for grammatical analysis of Surah 94. In-app word meanings and transliterations come from Quran Foundation; a linguistic connection does not by itself establish a thematic connection.',
     href: 'https://corpus.quran.com/wordbyword.jsp?chapter=94&verse=5',
   },
   'al-baqarah': {
@@ -51,20 +51,6 @@ export const sources: Record<string, Source> = {
     href: 'https://quran.com/14/7',
   },
 };
-
-export const words = {
-  'fa-inna': { arabic: 'فَإِنَّ', latin: 'fa-inna', meaning: 'So indeed', root: '—', grammar: 'Conjunction + accusative particle', note: 'The prefixed fa is followed by the particle inna.', verse: '94:5' },
-  inna: { arabic: 'إِنَّ', latin: 'inna', meaning: 'Indeed', root: '—', grammar: 'Accusative particle', note: 'A particle used here for emphasis.', verse: '94:6' },
-  with: { arabic: 'مَعَ', latin: 'maʿa', meaning: 'with', root: '—', grammar: 'Preposition', note: 'The word is shown with its contextual meaning in this passage.', verse: '94:5–6' },
-  hardship: { arabic: 'ٱلۡعُسۡرِ', latin: 'al-ʿusri', meaning: 'the hardship', root: 'ع س ر', grammar: 'Noun · masculine · genitive', note: 'The definite noun occurs in both verses. The full commentary is available in the Context section.', verse: '94:5–6' },
-  ease: { arabic: 'يُسۡرًا', latin: 'yusran', meaning: 'ease', root: 'ي س ر', grammar: 'Noun · masculine · indefinite · accusative', note: 'An indefinite noun in this passage. Read the word together with the complete verse.', verse: '94:5–6' },
-} as const;
-
-export type WordId = keyof typeof words;
-export const verseWords: { key: string; ids: WordId[]; translation: string }[] = [
-  { key: '94:5', ids: ['fa-inna', 'with', 'hardship', 'ease'], translation: 'So, surely with hardship comes ease.' },
-  { key: '94:6', ids: ['inna', 'with', 'hardship', 'ease'], translation: 'Surely with ˹that˺ hardship comes ˹more˺ ease.' },
-];
 
 export function normalizedSearch(value: string) {
   return value.normalize('NFKD').replace(/\p{M}/gu, '').replace(/[ʿʾ‘’']/g, '').toLowerCase().trim();

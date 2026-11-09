@@ -45,7 +45,7 @@ let pendingPassage: Promise<LivePassage> | undefined;
 export async function getAshSharhExperience(): Promise<LivePassage> {
   if (passageCache && passageCache.expiresAt > Date.now()) return passageCache.value;
   if (pendingPassage) return pendingPassage;
-  pendingPassage = (async () => {
+  const request = (async () => {
     try {
       const api = getQuranClient().content.v4;
       const [verses, translations, tafsirs] = await Promise.all([
@@ -70,9 +70,12 @@ export async function getAshSharhExperience(): Promise<LivePassage> {
     } catch {
       // Do not forward upstream SDK errors, which can include provider response bodies.
       throw new Error('The live passage is temporarily unavailable. Please try again.');
-    } finally {
-      pendingPassage = undefined;
     }
   })();
-  return pendingPassage;
+  pendingPassage = request;
+  try {
+    return await request;
+  } finally {
+    if (pendingPassage === request) pendingPassage = undefined;
+  }
 }

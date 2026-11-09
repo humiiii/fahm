@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: { default: 'Fahm — A place for understanding', template: '%s · Fahm' },
   description: 'Explore Islamic topics with Quran passages, hadith references, word meanings, and the context around them.',
   robots: { index: false, follow: false },
+  other: { google: 'notranslate' },
 };
 
 const themeScript = `(function(){try{var t=localStorage.getItem('fahm-theme');document.documentElement.dataset.theme=t==='light'||t==='dark'?t:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}catch(e){}})()`;

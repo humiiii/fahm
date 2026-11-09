@@ -204,6 +204,30 @@ h1, h2, h3, p { margin: 0; }
 .passage-end { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 17px; }
 .passage-end .text-link { font-size: 10px; }
 .passage-end > span { display: inline-flex; gap: 7px; align-items: center; color: var(--faint); font-size: 10px; }
+.passage-provenance { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 10px; margin: 16px 0 0; }
+.verse-credit a { display: inline-flex; align-items: center; gap: 4px; }
+.verse-credit a:hover { color: var(--blue); text-decoration: underline; }
+.context-translation { font-size: 13px; line-height: 1.8; }
+.translation-notes { font-family: 'DM Sans', sans-serif; font-size: 12px; line-height: 1.85; margin-top: 15px; color: var(--muted); }
+.translation-notes summary { cursor: pointer; color: var(--blue); font-size: 11px; width: fit-content; }
+.translation-notes ol { padding-left: 20px; margin-bottom: 0; }
+.verse-translation sup, .context-translation sup { color: var(--blue); font-size: 10px; margin-left: 3px; }
+.context-verses > div[data-current] { background: var(--blue-wash); margin-inline: -12px; padding-inline: 12px; border-left: 2px solid var(--blue); }
+.publisher-content { margin-top: 25px; font-family: 'DM Sans', 'Amiri Quran', serif; font-size: 13px; line-height: 1.95; }
+.publisher-content p { margin-top: 16px; unicode-bidi: plaintext; }
+.detail-dialog .publisher-content h2, .detail-dialog .publisher-content h3 { font-family: 'DM Sans', sans-serif; font-size: 19px; line-height: 1.5; letter-spacing: -.3px; margin-top: 28px; }
+.publisher-content ul, .publisher-content ol { padding-left: 20px; }
+.publisher-content blockquote { margin-inline: 0; padding-left: 15px; border-left: 2px solid var(--line); }
+.reader-context-source { margin-top: 30px; }
+.reading-state { min-height: calc(100dvh - 164px); max-width: 790px; padding-block: 75px; }
+.reading-state h1 { font-size: clamp(30px, 4vw, 43px); line-height: 1.3; letter-spacing: -1.4px; font-weight: 400; margin-top: 20px; }
+.reading-state > p { max-width: 530px; font-size: 14px; color: var(--muted); margin-top: 18px; }
+.reading-state-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-top: 28px; }
+.reading-state > .text-link { margin-top: 32px; }
+.reading-skeleton { display: grid; gap: 20px; margin-top: 35px; border-block: 1px solid var(--line); padding-block: 35px; }
+.reading-skeleton span { height: 13px; width: 100%; background: var(--soft); border-radius: 2px; }
+.reading-skeleton span:nth-child(2) { width: 82%; }
+.reading-skeleton span:nth-child(3) { width: 65%; }
 .copy-status { font-size: 11px; color: var(--muted); margin-top: 12px; }
 .reference-card { display: block; text-align: left; padding: 21px 23px; width: 100%; background: var(--soft); border: 1px solid var(--line); border-radius: 3px; }
 .reference-card:hover { border-color: var(--faint); }
