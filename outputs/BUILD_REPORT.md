@@ -1,4 +1,4 @@
-# Fahm Atlas — First local build
+# Fahm — First local build
 
 Date: 9 November 2026
 

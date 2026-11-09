@@ -6,7 +6,7 @@ export function Header({ active = 'Explore' }: { active?: string }) {
   return <header className="site-header">
     <a href="#main" className="skip-link">Skip to content</a>
     <div className="header-inner">
-      <Link href="/" className="brand" aria-label="Fahm Atlas home"><Compass size={25} strokeWidth={1.5} /><span>fahm<span className="brand-atlas"> atlas</span><span className="brand-period">.</span></span></Link>
+      <Link href="/" className="brand" aria-label="Fahm home"><Compass size={25} strokeWidth={1.5} /><span>Fahm<span className="brand-period">.</span></span></Link>
       <nav className="main-nav" aria-label="Main navigation">
         <Link href="/" aria-current={active === 'Explore' ? 'page' : undefined}>Explore</Link>
         <Link href="/quran" aria-current={active === 'Quran' ? 'page' : undefined}>Quran</Link>

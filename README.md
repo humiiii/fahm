@@ -1,4 +1,4 @@
-# Fahm Atlas
+# Fahm
 
 A local Next.js prototype for exploring Islamic topics with source references and contextual word details.
 

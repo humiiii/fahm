@@ -69,7 +69,6 @@ h1, h2, h3, p { margin: 0; }
 .header-inner { height: 82px; display: flex; align-items: center; width: min(1280px, calc(100% - 88px)); margin: auto; }
 .brand { display: inline-flex; align-items: center; gap: 11px; letter-spacing: -.8px; font-size: 21px; font-weight: 600; }
 .brand svg { color: var(--blue); }
-.brand-atlas { font-weight: 400; }
 .brand-period { color: var(--blue); }
 .main-nav { display: flex; align-items: center; gap: 31px; margin-left: 67px; height: 100%; font-size: 12px; }
 .main-nav a { color: var(--muted); height: 100%; display: inline-flex; align-items: center; gap: 4px; position: relative; }

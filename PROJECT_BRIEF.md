@@ -1,8 +1,8 @@
-# Fahm Atlas — Project Brief
+# Fahm — Project Brief
 
 Updated: 9 November 2026  
 Status: first local prototype implemented on 9 November 2026; validation and editorial review are in progress. See README.md for the actual implemented scope.  
-Proposed working name: **Fahm Atlas**. Fahm (فهم) means understanding; Atlas suggests exploring connected topics and sources. The name remains provisional pending domain and trademark checks. The app project folder is `fahm`.
+Project name: **Fahm**. The Arabic word فهم means understanding. The project folder is `fahm`; domain and trademark availability have not been verified.
 
 ## 1. What we are building
 

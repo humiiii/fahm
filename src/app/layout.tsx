@@ -6,7 +6,7 @@ import '@fontsource/amiri-quran/400.css';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: { default: 'Fahm Atlas — A place for understanding', template: '%s · Fahm Atlas' },
+  title: { default: 'Fahm — A place for understanding', template: '%s · Fahm' },
   description: 'Explore Islamic topics with Quran passages, hadith references, word meanings, and the context around them.',
   robots: { index: false, follow: false },
 };
