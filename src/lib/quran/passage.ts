@@ -20,6 +20,7 @@ export type PassageVerse = {
   words: PassageWord[];
   translationHtml: string;
   translationText: string;
+  footnotes: { id: string; html: string; text: string }[];
 };
 export type LivePassage = {
   verses: PassageVerse[];
@@ -39,8 +40,18 @@ export function contentText(html: string): string {
   return decodeHTML(safeContentHtml(html).replace(/<br\s*\/?\s*>|<\/p>/gi, '\n').replace(/<[^>]*>/g, '')).trim();
 }
 
+export function footnoteIds(html: string): string[] {
+  const ids = new Set<string>();
+  sanitizeHtml(html, { transformTags: { sup: (tagName, attributes) => {
+    if (/^\d+$/.test(attributes.foot_note ?? '')) ids.add(attributes.foot_note);
+    return { tagName, attribs: {} };
+  } } });
+  return [...ids];
+}
+
 export function normalizeAshSharh(
   raw: Verse[], translation: TranslationResource | undefined, commentary: TafsirResource | undefined,
+  footnotes: Record<string, string> = {},
 ): LivePassage {
   if (translation?.id !== TRANSLATION_ID || !translation.name || !translation.authorName ||
       commentary?.id !== TAFSIR_ID || !commentary.name || !commentary.authorName || raw.length !== 8) {
@@ -64,9 +75,14 @@ export function normalizeAshSharh(
       };
     });
     if (!words?.length) throw new Error('The word data is unavailable.');
+    const notes = footnoteIds(translated.text).map((id) => {
+      if (!footnotes[id]?.trim()) throw new Error('A translator footnote is unavailable.');
+      return { id, html: safeContentHtml(footnotes[id]), text: contentText(footnotes[id]) };
+    });
     return {
       key, number: index + 1, arabic: verse.textUthmani, words,
       translationHtml: safeContentHtml(translated.text), translationText: contentText(translated.text),
+      footnotes: notes,
     };
   });
   const tafsir = raw[4].tafsirs?.find((item) => item.resourceId === TAFSIR_ID);

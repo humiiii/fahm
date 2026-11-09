@@ -1,7 +1,7 @@
 import 'server-only';
 import { createServerClient, type ServerClient } from '@quranjs/api/server';
 import { readQuranConfig } from './config';
-import { normalizeAshSharh, TRANSLATION_ID, TAFSIR_ID, type LivePassage } from './passage';
+import { footnoteIds, normalizeAshSharh, TRANSLATION_ID, TAFSIR_ID, type LivePassage } from './passage';
 
 let client: ServerClient | undefined;
 
@@ -57,7 +57,13 @@ export async function getAshSharhExperience(): Promise<LivePassage> {
         api.resources.translations.list({ language: 'en' }),
         api.resources.tafsirs.list({ language: 'en' }),
       ]);
-      const value = normalizeAshSharh(verses, translations.find((item) => item.id === TRANSLATION_ID), tafsirs.find((item) => item.id === TAFSIR_ID));
+      const noteIds = [...new Set(verses.flatMap((verse) => footnoteIds(verse.translations?.find((item) => item.resourceId === TRANSLATION_ID)?.text ?? '')))];
+      const notes = await Promise.all(noteIds.map(async (id) => {
+        const response = await api.raw.getFootNote({ path: { id } }) as { footNote?: { text?: string } };
+        if (!response.footNote?.text) throw new Error('A translator footnote is unavailable.');
+        return [id, response.footNote.text] as const;
+      }));
+      const value = normalizeAshSharh(verses, translations.find((item) => item.id === TRANSLATION_ID), tafsirs.find((item) => item.id === TAFSIR_ID), Object.fromEntries(notes));
       // Strict one-hour in-memory lifetime. Expired content is never served on failure.
       passageCache = { value, expiresAt: Date.now() + 60 * 60 * 1000 };
       return value;

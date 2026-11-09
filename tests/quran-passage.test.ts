@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import type { Verse } from '@quranjs/api';
-import { contentText, normalizeAshSharh, safeContentHtml } from '../src/lib/quran/passage';
+import { contentText, footnoteIds, normalizeAshSharh, safeContentHtml } from '../src/lib/quran/passage';
 
 // Synthetic provider-shaped data: no Quran text or publisher response is bundled.
 const translation = { id: 20, name: 'Translation credit', authorName: 'Translator' };
@@ -48,4 +48,14 @@ test('publisher markup retains readable content while removing scripts, external
   const result = safeContentHtml('<h2 onclick="bad()">Context</h2><script>bad()</script><iframe>bad()</iframe><p>Read <em>carefully</em> &amp; fully.<img src=x onerror="bad()"><a href="javascript:bad()">Source</a></p>');
   assert.equal(result, '<h2>Context</h2><p>Read <em>carefully</em> &amp; fully.Source</p>');
   assert.equal(contentText('<p>One &lt; two.</p><p>Next &#8212; line.</p>'), 'One < two.\nNext — line.');
+});
+
+test('translator notes retain their association and a missing note never becomes an unexplained marker', () => {
+  const data = fixture();
+  data[0].translations![0].text += '<sup foot_note=123>1</sup>';
+  assert.deepEqual(footnoteIds(data[0].translations![0].text), ['123']);
+  assert.throws(() => normalizeAshSharh(data, translation, commentary));
+  const passage = normalizeAshSharh(data, translation, commentary, { '123': '<p>Publisher note.</p>' });
+  assert.equal(passage.verses[0].footnotes[0].html, '<p>Publisher note.</p>');
+  assert.equal(passage.verses[1].footnotes.length, 0);
 });
