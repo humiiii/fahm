@@ -1,6 +1,7 @@
 import 'server-only';
 import { createServerClient, type ServerClient } from '@quranjs/api/server';
 import { readQuranConfig } from './config';
+import { normalizeAshSharh, TRANSLATION_ID, TAFSIR_ID, type LivePassage } from './passage';
 
 let client: ServerClient | undefined;
 
@@ -37,3 +38,35 @@ async function getChapterPassage(chapter: '1' | '94', verseCount: number) {
 
 export const getAlFatihah = () => getChapterPassage('1', 7);
 export const getAshSharh = () => getChapterPassage('94', 8);
+
+let passageCache: { value: LivePassage; expiresAt: number } | undefined;
+let pendingPassage: Promise<LivePassage> | undefined;
+
+export async function getAshSharhExperience(): Promise<LivePassage> {
+  if (passageCache && passageCache.expiresAt > Date.now()) return passageCache.value;
+  if (pendingPassage) return pendingPassage;
+  pendingPassage = (async () => {
+    try {
+      const api = getQuranClient().content.v4;
+      const [verses, translations, tafsirs] = await Promise.all([
+        api.verses.byChapter('94', {
+          language: 'en', words: true, wordFields: { textUthmani: true, location: true },
+          fields: { textUthmani: true }, translations: [TRANSLATION_ID], tafsirs: [TAFSIR_ID],
+          translationFields: { resourceName: true }, perPage: 8, page: 1,
+        }),
+        api.resources.translations.list({ language: 'en' }),
+        api.resources.tafsirs.list({ language: 'en' }),
+      ]);
+      const value = normalizeAshSharh(verses, translations.find((item) => item.id === TRANSLATION_ID), tafsirs.find((item) => item.id === TAFSIR_ID));
+      // Strict one-hour in-memory lifetime. Expired content is never served on failure.
+      passageCache = { value, expiresAt: Date.now() + 60 * 60 * 1000 };
+      return value;
+    } catch {
+      // Do not forward upstream SDK errors, which can include provider response bodies.
+      throw new Error('The live passage is temporarily unavailable. Please try again.');
+    } finally {
+      pendingPassage = undefined;
+    }
+  })();
+  return pendingPassage;
+}

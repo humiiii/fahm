@@ -1,7 +1,7 @@
 import { loadEnvConfig } from '@next/env';
 import { QuranHttpError } from '@quranjs/api/server';
 import { QuranConfigurationError } from '../src/lib/quran/config';
-import { getAlFatihah, getAshSharh } from '../src/lib/quran/server';
+import { getAlFatihah, getAshSharh, getAshSharhExperience } from '../src/lib/quran/server';
 
 loadEnvConfig(process.cwd());
 
@@ -13,6 +13,9 @@ async function main() {
   if (production) {
     const ashSharh = await getAshSharh();
     console.log(`Ash-Sharh: ${ashSharh.length} Arabic verses fetched (${ashSharh[0].key}–${ashSharh.at(-1)!.key}).`);
+    const experience = await getAshSharhExperience();
+    console.log(`Live experience verified: ${experience.verses.length} translations, ${experience.verses.reduce((total, verse) => total + verse.words.length, 0)} words, and published commentary.`);
+    console.log(`Credits: ${experience.translation.name}; ${experience.commentary.name}.`);
   }
   console.log('No credentials, access tokens, or provider content were written to disk.');
 }
