@@ -1,0 +1,41 @@
+[
+  {
+    "id": "hardship-and-ease",
+    "title": "Hardship & ease",
+    "arabic": "العُسْر وَاليُسْر",
+    "transliteration": "Al-ʿusr wa al-yusr",
+    "description": "A closer look at difficulty and relief, beginning with a short passage in Ash-Sharh.",
+    "category": "Inner life",
+    "aliases": ["difficulty", "relief", "struggle", "hardship", "ease", "usr", "yusr"],
+    "related": ["patience", "gratitude"],
+    "referenceIds": ["ash-sharh", "muslim-2999", "ibn-kathir", "corpus"],
+    "readingMinutes": 4,
+    "featured": true
+  },
+  {
+    "id": "patience",
+    "title": "Patience",
+    "arabic": "الصَّبْر",
+    "transliteration": "Ṣabr",
+    "description": "Explore patience through a Quran passage, a hadith, and the context around them.",
+    "category": "Character",
+    "aliases": ["sabr", "sabar", "endurance", "steadfastness", "patient"],
+    "related": ["hardship-and-ease", "gratitude"],
+    "referenceIds": ["al-baqarah", "muslim-2999"],
+    "readingMinutes": 2,
+    "featured": false
+  },
+  {
+    "id": "gratitude",
+    "title": "Gratitude",
+    "arabic": "الشُّكْر",
+    "transliteration": "Shukr",
+    "description": "Read about thankfulness with the original references close at hand.",
+    "category": "Character",
+    "aliases": ["shukr", "shukar", "thankfulness", "thankful", "blessings"],
+    "related": ["hardship-and-ease", "patience"],
+    "referenceIds": ["ibrahim", "muslim-2999"],
+    "readingMinutes": 2,
+    "featured": false
+  }
+]
