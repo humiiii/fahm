@@ -62,3 +62,11 @@ Review the homepage and first topic interaction with the owner, then refine the 
 - `npm run typecheck`: passed. `npm test`: all eight tests passed, including provider host pairing, explicit legacy scope configuration, and invalid configuration rejection.
 - `npm run build -- --webpack`: passed. The default Turbopack build hit a local worker port-permission error, including on an escalated retry; the build script remains unchanged.
 - The interface still uses the original local sample content. Live reader rendering, translations, and production approval are separate next steps. Pre-live cannot supply the Ash-Sharh topic excerpt.
+
+## Production access verification — 9 November 2026
+
+- The owner configured production credentials locally after the Console showed the required Content permissions as granted.
+- `npm run quran:check` succeeded against production: seven Arabic verses for Al-Fatihah (1:1–1:7) and eight for Ash-Sharh (94:1–94:8). Both responses were checked for complete verse counts, order, and nonempty Arabic text.
+- Extended the reusable server module and connection check to verify Ash-Sharh when production is selected. Pre-live checks continue to request only Al-Fatihah.
+- `npm run typecheck` and all eight existing tests passed. No UI changes were made; the interface still displays its local preview content.
+- Credentials remain in the ignored `.env.local`; no secrets, tokens, or API response content were added to Git.

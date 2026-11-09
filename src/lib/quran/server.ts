@@ -20,17 +20,20 @@ function getQuranClient() {
   return client;
 }
 
-export async function getAlFatihah() {
-  const verses = await getQuranClient().content.v4.verses.byChapter('1', {
+async function getChapterPassage(chapter: '1' | '94', verseCount: number) {
+  const verses = await getQuranClient().content.v4.verses.byChapter(chapter, {
     fields: { textUthmani: true },
     words: false,
-    perPage: 7,
+    perPage: verseCount,
     page: 1,
   });
-  if (verses.length !== 7 || verses.some((verse, index) =>
-    verse.verseKey !== `1:${index + 1}` || !verse.textUthmani?.trim(),
+  if (verses.length !== verseCount || verses.some((verse, index) =>
+    verse.verseKey !== `${chapter}:${index + 1}` || !verse.textUthmani?.trim(),
   )) {
-    throw new Error('The provider did not return the complete Al-Fatihah passage.');
+    throw new Error('The provider did not return the complete requested chapter.');
   }
   return verses.map((verse) => ({ key: verse.verseKey, arabic: verse.textUthmani! }));
 }
+
+export const getAlFatihah = () => getChapterPassage('1', 7);
+export const getAshSharh = () => getChapterPassage('94', 8);

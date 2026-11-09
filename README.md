@@ -27,9 +27,9 @@ Run the read-only connection check after saving your credentials:
 npm run quran:check
 ```
 
-It authenticates server-side, fetches Al-Fatihah's seven Arabic verses, validates their order and text, and prints a success summary without credentials or tokens. It uses the same server-only data module available to future Server Components. The official SDK caches OAuth tokens in memory; requests have a 15-second timeout and fetched content is not persisted. Configuration errors fail before any request. Restart the development server after changing credentials.
+It authenticates server-side, fetches Al-Fatihah's seven Arabic verses, validates their order and text, and prints a success summary without credentials or tokens. In production, it also verifies all eight verses of Ash-Sharh. It uses the same server-only data module available to future Server Components. The official SDK caches OAuth tokens in memory; requests have a 15-second timeout and fetched content is not persisted. Configuration errors fail before any request. Restart the development server after changing credentials.
 
-The pre-live connection was verified on 9 November 2026. Reader pages still show the local preview; the next step is displaying live content there with provider attribution and translation protection. Pre-live contains only surahs 1 and 2, so the Hardship & ease sample from surah 94 needs approved production access.
+Both pre-live and production connections were verified on 9 November 2026. Production successfully returned Al-Fatihah (1:1–1:7) and Ash-Sharh (94:1–94:8). Reader pages still show the local preview; the next step is displaying live content there with provider attribution and translation protection. Pre-live contains only surahs 1 and 2; use the approved production credentials for Ash-Sharh.
 
 ## Checks
 
@@ -65,7 +65,7 @@ The agreed product scope, stack, API considerations, and roadmap are in [PROJECT
 - `src/components`: navigation, search, reading controls, and source/word dialogs.
 - `src/content`: local topic metadata and editorial MDX.
 - `src/lib`: source records, passage data, and topic-search implementation.
-- `src/lib/quran`: validated provider configuration and the server-only Al-Fatihah fetcher.
+- `src/lib/quran`: validated provider configuration and server-only Al-Fatihah and Ash-Sharh fetchers.
 - `scripts/check-quran.ts`: private-credential-safe live connection check.
 - `tests`: meaningful search and reference-integrity checks.
 

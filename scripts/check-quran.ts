@@ -1,14 +1,19 @@
 import { loadEnvConfig } from '@next/env';
 import { QuranHttpError } from '@quranjs/api/server';
 import { QuranConfigurationError } from '../src/lib/quran/config';
-import { getAlFatihah } from '../src/lib/quran/server';
+import { getAlFatihah, getAshSharh } from '../src/lib/quran/server';
 
 loadEnvConfig(process.cwd());
 
 async function main() {
   const verses = await getAlFatihah();
-  console.log('Quran Foundation connection verified.');
+  const production = process.env.QF_ENV?.trim() === 'production';
+  console.log(`Quran Foundation ${production ? 'production' : 'pre-live'} connection verified.`);
   console.log(`Al-Fatihah: ${verses.length} Arabic verses fetched (${verses[0].key}–${verses.at(-1)!.key}).`);
+  if (production) {
+    const ashSharh = await getAshSharh();
+    console.log(`Ash-Sharh: ${ashSharh.length} Arabic verses fetched (${ashSharh[0].key}–${ashSharh.at(-1)!.key}).`);
+  }
   console.log('No credentials, access tokens, or provider content were written to disk.');
 }
 
