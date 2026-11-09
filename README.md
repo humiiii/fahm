@@ -13,7 +13,7 @@ npm run dev
 
 Open the Local URL printed by Next.js, `http://127.0.0.1:3087`.
 
-The development script uses Webpack polling for reliable file watching in this local macOS environment. The production build uses the default Next.js bundler.
+The development script uses Webpack polling for reliable file watching in this local macOS environment. The production build defaults to Turbopack. If this macOS environment blocks its local worker port, run `npm run build -- --webpack`; this build path is verified.
 
 ## Quran Foundation credentials
 
@@ -27,9 +27,9 @@ Run the read-only connection check after saving your credentials:
 npm run quran:check
 ```
 
-It authenticates server-side, fetches Al-Fatihah's seven Arabic verses, validates their order and text, and prints a success summary without credentials or tokens. In production, it also verifies all eight verses of Ash-Sharh. It uses the same server-only data module available to future Server Components. The official SDK caches OAuth tokens in memory; requests have a 15-second timeout and fetched content is not persisted. Configuration errors fail before any request. Restart the development server after changing credentials.
+It authenticates server-side, fetches Al-Fatihah's seven Arabic verses, validates their order and text, and prints a success summary without credentials or tokens. In production, it also verifies all eight verses of Ash-Sharh, their translations, 27 words, translator notes, and published commentary. It uses the same server-only data module as the topic and reader pages. The official SDK caches OAuth tokens in memory; requests have a 15-second timeout. Validated passage data is cached in server memory for one hour, with concurrent loads shared. Expired data is not used as a fallback. No offline database or build-time content bundle is created. Configuration errors fail before any request. Restart the development server after changing credentials.
 
-Both pre-live and production connections were verified on 9 November 2026. Production successfully returned Al-Fatihah (1:1–1:7) and Ash-Sharh (94:1–94:8). Reader pages still show the local preview; the next step is displaying live content there with provider attribution and translation protection. Pre-live contains only surahs 1 and 2; use the approved production credentials for Ash-Sharh.
+Both pre-live and production connections were verified on 9 November 2026. Production successfully returned Al-Fatihah (1:1–1:7) and Ash-Sharh (94:1–94:8). The Hardship & ease topic, context panel, and complete Ash-Sharh reader now display live provider data with attribution and translation protection. Pre-live contains only surahs 1 and 2; use the approved production credentials for Ash-Sharh.
 
 ## Checks
 
@@ -42,20 +42,22 @@ npm run build
 ## Included
 
 - Explore homepage with typo-tolerant topic search and category filters.
-- Hardship & ease topic with the 94:5–6 reading excerpt, contextual word definitions, source panel, hadith and tafsir references.
+- Hardship & ease topic with live 94:5–6 Arabic, Saheeh International translation, contextual word meanings, exact word locations, source panels, and published Ibn Kathir commentary.
 - Short Patience and Gratitude reference pages.
-- Supporting two-verse reader preview, source directory, about page, and not-found page.
+- Complete eight-verse Ash-Sharh reader, full-surah context panel, expandable translator notes, and credited Arabic/translation copying.
+- Loading and retry screens, with an original-source link when the provider is unavailable.
+- Source directory, about page, and not-found page.
 - Native accessible dialogs, keyboard navigation, responsive layout, reduced-motion support, and light/dark themes.
 - Theme and Arabic font-size preferences stored only in the current browser.
 - Locally bundled DM Sans and Amiri Quran fonts; no external font request is needed.
 
 ## Content status
 
-This is a local prototype, not a published scholarly resource. Reference links were checked on 9 November 2026. Editorial wording and connections await review. Provider access and content-use permissions must be established before public release. No publisher affiliation is implied.
+This is a local prototype, not a published scholarly resource. Reference links were checked on 9 November 2026. Editorial wording and connections await review. Production Content API access is connected. Public release still needs editorial review, privacy/terms preparation, and a final content-use review. No publisher affiliation is implied.
 
-The two sample translations are credited to Dr. Mustafa Khattab, The Clear Quran. Hadith and tafsir are linked with short editorial descriptions; full third-party text is not bundled. Word details reference the Quranic Arabic Corpus. See the in-app Sources page for links.
+The live translation is Saheeh International (resource 20). Published commentary is Ibn Kathir (Abridged), by Hafiz Ibn Kathir (resource 169). Their names are checked against the provider resource catalogs. The Clear Quran resource used by the mockup was unavailable in the verified production catalog and is not substituted silently. Word meanings and transliterations come from Quran Foundation, with each occurrence identified by its location. Roots and grammar from the old sample have been removed. The hadith card remains an explicitly labelled editorial summary linking to Sahih Muslim 2999 on Sunnah.com; it is not a live hadith-text integration.
 
-The root metadata deliberately marks the prototype `noindex`. Remove this only after content approval and public-launch preparation. Server-side Quran Foundation access is connected, while the interface still uses local sample content. No full Quran reader, audio player, accounts, or analytics are included yet.
+The root metadata deliberately marks the prototype `noindex`. Remove this only after content approval and public-launch preparation. The first topic and its complete-surah reader use live content. Patience and Gratitude remain short reference-led drafts. Navigation across all 114 chapters, audio, accounts, and analytics are not included yet.
 
 The agreed product scope, stack, API considerations, and roadmap are in [PROJECT_BRIEF.md](./PROJECT_BRIEF.md).
 
@@ -70,3 +72,9 @@ The agreed product scope, stack, API considerations, and roadmap are in [PROJECT
 - `tests`: meaningful search and reference-integrity checks.
 
 No GitHub repository or deployment has been created.
+
+## Verified first experience
+
+Explore → Hardship & ease → word detail → full-surah context → published commentary → complete reader → back to the topic. No account or saving step is required.
+
+Verified at 1280px and 390px, including light/dark themes, native dialog focus restoration, translation notes, credited copying, and production failure/retry recovery. See [outputs/BUILD_REPORT.md](./outputs/BUILD_REPORT.md) for details and current screenshots.

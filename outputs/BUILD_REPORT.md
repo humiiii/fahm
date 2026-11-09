@@ -2,6 +2,8 @@
 
 Date: 9 November 2026
 
+The sections below retain the initial prototype record. The latest milestone is **One complete live experience** at the end of this report.
+
 ## Implemented
 
 - Next.js App Router, TypeScript, Tailwind, Motion, Lucide, MDX, and Fuse.js.
@@ -70,3 +72,33 @@ Review the homepage and first topic interaction with the owner, then refine the 
 - Extended the reusable server module and connection check to verify Ash-Sharh when production is selected. Pre-live checks continue to request only Al-Fatihah.
 - `npm run typecheck` and all eight existing tests passed. No UI changes were made; the interface still displays its local preview content.
 - Credentials remain in the ignored `.env.local`; no secrets, tokens, or API response content were added to Git.
+
+## One complete live experience — 9 November 2026
+
+The current flow is Explore → Hardship & ease → word detail → complete-surah context → published commentary → full reader → back to the topic. No account, saving, or collection step is required.
+
+### Live content and behavior
+
+- Production Quran Foundation data replaces the bundled sample Arabic, translations, and word definitions. Topic verses are 94:5–6; the context panel and reader include all eight verses of Ash-Sharh.
+- Saheeh International (resource 20) is credited from the live resource catalog. The Clear Quran resource used in the mockup was not present in the verified catalog. The app does not label the new translation as the old one.
+- Each of the 27 words has its own verse/position location, supplied Arabic text, contextual translation, and transliteration. The sample root and grammar descriptions were removed rather than presented as API data.
+- Ibn Kathir (Abridged), by Hafiz Ibn Kathir (resource 169), opens in the source panel with the published explanation. Publisher HTML is sanitized on the server; Quran and publisher-content containers disable browser translation.
+- Two translator notes are fetched from the Footnote API and available beside their translations. Copying includes Arabic, the translation, any notes, the translator credit, and the original verse URL.
+- Validated content is shared across concurrent requests and cached only in server memory for one hour. Requests time out after 15 seconds. Failures show a retry action and a Quran.com link; samples are not served as a fallback.
+- Topic routes render at request time. The earlier static-params setup caused a production-only rendering failure and was removed before verification.
+
+### Verification
+
+- `npm run quran:check`: passed against production with 8 translations, 27 words, and published commentary; footnote association is validated during loading.
+- `npm run typecheck`: passed. All 11 current tests passed, including missing-data rejection, source association, unsafe HTML removal, and translator-note preservation.
+- `npm run build -- --webpack`: passed. The default build command is unchanged; Webpack remains the verified option for this local environment.
+- Browser-tested Explore-to-topic navigation, both occurrences of ease, word-by-word mode, resizing, full-surah context, commentary, reader navigation, translator-note expansion, and copying with correct credits and notes.
+- Native Escape closes the panel and restores focus to the triggering word. Opening another detail focuses the close control.
+- Checked 1280px and 390px widths with no horizontal overflow. The mobile sheet fits 390px; light and dark themes were inspected.
+- Tested the production build on an isolated local server using dummy credentials: it showed the safe failure screen. After restoring the normal configuration, clicking **Try again** recovered to the live topic without reloading the browser. A separate check verified recovery from missing configuration and shared concurrent loads.
+
+Current screenshots: [desktop topic](./live-topic-desktop.png), [mobile reader](./live-reader-mobile.png), [mobile word panel](./live-word-mobile.png).
+
+### Remaining limits
+
+The hadith card is an attributed editorial summary with an original-source link. Patience and Gratitude are short reference-led drafts. Editorial introductions and thematic relationships await qualified review. Full-Quran navigation, audio, offline support, public privacy/terms pages, and deployment are outside this milestone. No GitHub remote or public deployment was created.

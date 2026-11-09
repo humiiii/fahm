@@ -1,7 +1,7 @@
 # Fahm — Project Brief
 
 Updated: 9 November 2026  
-Status: first local prototype implemented on 9 November 2026; validation and editorial review are in progress. See README.md for the actual implemented scope.  
+Status: the first experience uses live production content and is verified locally; editorial review and public launch preparation remain. See README.md for the actual implemented scope.
 Project name: **Fahm**. The Arabic word فهم means understanding. The project folder is `fahm`; domain and trademark availability have not been verified.
 
 ## 1. What we are building
@@ -148,7 +148,7 @@ The older hardship/ease concept is preserved here for understanding the topic in
 
 [Earlier exploration mockup](/Users/umaidrather/.codex/visualizations/2026/11/08/01a1ba1a-d266-7cb0-94aa-2f169b98fe97/quran-threads-preview.html)
 
-The reader’s visual direction is approved. The Explore homepage and expanded topic page still need to be designed using that foundation. The mockup contains sample content and local interactions; it is not a production application or a live API integration.
+The reader’s visual direction is approved and has been adapted into the implemented Explore homepage and topic page. The linked mockups remain historical visual references with sample content; the Next.js app is the current implementation.
 
 ### Visual principles
 
@@ -318,17 +318,17 @@ Validate both usability and repeat usefulness. People saying a page looks attrac
 - [ ] Apply for Quran Foundation access; evaluate hadith and commentary sources.
 - [ ] Identify the first audience and initial interface language.
 - [ ] Establish content fields, source requirements, and the review workflow.
-- [ ] Adapt the approved visual system into a homepage and topic-page design.
+- [x] Adapt the approved visual system into a homepage and topic-page design.
 
 Done when the first topic has a concrete layout and an attainable source plan.
 
 ### Phase 1 — One complete experience
 
-- [ ] Scaffold Next.js, TypeScript, Tailwind, Motion, and Lucide.
-- [ ] Build the Explore homepage and Hardship & ease topic page.
-- [ ] Implement source details, word explanations, passage context, and related-topic navigation.
-- [ ] Connect the relevant Quran passage using an approved source.
-- [ ] Make the flow work on mobile and with a keyboard.
+- [x] Scaffold Next.js, TypeScript, Tailwind, Motion, and Lucide.
+- [x] Build the Explore homepage and Hardship & ease topic page.
+- [x] Implement source details, word explanations, passage context, and related-topic navigation.
+- [x] Connect the relevant Quran passage using an approved source.
+- [x] Make the flow work on mobile and with a keyboard.
 
 Done when a visitor can move from the homepage to a topic, inspect a source, open context, and return without an account or a saving step.
 
@@ -405,4 +405,4 @@ This brief is the implementation starting point. It records the current directio
 
 ## Implementation update — 9 November 2026
 
-The first local build now includes the Explore homepage, fuzzy topic search and filters, a developed Hardship & ease page, shorter Patience and Gratitude pages, source and contextual-word panels, a two-verse Quran reader preview, Sources and About pages, light/dark themes, and responsive layouts. Editorial content remains a draft. Full Quran navigation, audio, live API integrations, provider approvals, and public deployment are not included in this milestone.
+The local app includes Explore, fuzzy topic search and filters, a live Hardship & ease experience, shorter Patience and Gratitude pages, Sources and About pages, light/dark themes, and responsive layouts. Production Quran Foundation access supplies Ash-Sharh Arabic, Saheeh International translation, 27 contextual words, translator notes, and published Ibn Kathir commentary. The reader and context panel include all eight verses. Native dialogs, credited copying, text size controls, loading, and provider failure/retry recovery have been verified. Editorial introductions and thematic connections remain drafts, and the hadith card remains an attributed summary linking to its original source. All-chapter navigation, audio, scholarly sign-off, and public deployment remain future work.
