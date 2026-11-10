@@ -22,9 +22,15 @@ export const sources: Record<string, Source> = {
   },
   'muslim-2999': {
     id: 'muslim-2999', kind: 'Hadith', title: 'Sahih Muslim · 2999',
-    credit: 'Narrated by Suhaib · Book 55, Hadith 82 · Sunnah.com',
-    description: 'This narration discusses gratitude in favourable circumstances and patience in difficulty. The description here is an editorial summary, not a translation of the hadith. Read the complete text at its source.',
+    credit: 'Narrated by Suhaib · Book 55, Hadith 82',
+    description: 'A narration about gratitude in favourable circumstances and patience in difficulty. Open the complete Arabic, translation, and published explanation.',
     href: 'https://sunnah.com/muslim:2999',
+  },
+  hadeethenc: {
+    id: 'hadeethenc', kind: 'Hadith', title: 'Encyclopedia of Translated Prophetic Hadiths',
+    credit: 'HadeethEnc.com · Record 3298',
+    description: 'Publisher of the Arabic narration, English translation, grading, and explanation displayed for Sahih Muslim 2999. The current English edition is identified with each live reading.',
+    href: 'https://hadeethenc.com/en/browse/hadith/3298',
   },
   'ibn-kathir': {
     id: 'ibn-kathir', kind: 'Commentary', title: 'Ibn Kathir (Abridged)',

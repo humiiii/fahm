@@ -218,6 +218,28 @@ h1, h2, h3, p { margin: 0; }
 .detail-dialog .publisher-content h2, .detail-dialog .publisher-content h3 { font-family: 'DM Sans', sans-serif; font-size: 19px; line-height: 1.5; letter-spacing: -.3px; margin-top: 28px; }
 .publisher-content ul, .publisher-content ol { padding-left: 20px; }
 .publisher-content blockquote { margin-inline: 0; padding-left: 15px; border-left: 2px solid var(--line); }
+.hadith-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-top: 24px; padding-block: 15px; border-block: 1px solid var(--line); }
+.hadith-toolbar .text-link { font-size: 11px; }
+.hadith-grade { font-size: 11px; color: var(--blue); }
+.hadith-grade > span { color: var(--muted); font-size: 10px; }
+.hadith-arabic { font-size: 25px; line-height: 2.4; padding-block: 25px; white-space: pre-line; overflow-wrap: break-word; }
+.hadith-translation { padding-top: 20px; border-top: 1px solid var(--line); }
+.hadith-translation > p { margin-top: 12px; font-size: 14px; line-height: 1.95; white-space: pre-line; }
+.hadith-explanation { border-block: 1px solid var(--line); margin-top: 25px; padding-block: 18px; font-size: 12px; line-height: 1.9; }
+.hadith-explanation summary, .hadith-provenance summary { color: var(--blue); cursor: pointer; font-size: 12px; width: fit-content; }
+.hadith-explanation > div { margin-top: 18px; color: var(--muted); }
+.hadith-explanation p { white-space: pre-line; }
+.hadith-explanation h3 { font-size: 13px; font-weight: 500; color: var(--ink); margin-top: 22px; }
+.hadith-explanation ul { padding-left: 18px; }
+.hadith-explanation li + li { margin-top: 11px; }
+.hadith-provenance { margin-top: 25px; font-size: 11px; line-height: 1.9; color: var(--muted); }
+.hadith-provenance > p { margin-top: 10px; }
+.hadith-provenance > .text-link { margin-top: 16px; font-size: 11px; }
+.hadith-provenance details { margin-top: 20px; }
+.hadith-provenance details p { font-family: 'Amiri Quran', serif; font-size: 15px; line-height: 2; white-space: pre-line; margin-top: 15px; }
+.hadith-state { display: flex; align-items: baseline; gap: 10px; margin-top: 25px; color: var(--muted); font-size: 13px; line-height: 1.9; }
+.hadith-unavailable { flex-direction: column; gap: 18px; padding: 20px; border: 1px solid var(--line); background: var(--soft); }
+.hadith-unavailable .text-link { font-size: 11px; }
 .reader-context-source { margin-top: 30px; }
 .reading-state { min-height: calc(100dvh - 164px); max-width: 790px; padding-block: 75px; }
 .reading-state h1 { font-size: clamp(30px, 4vw, 43px); line-height: 1.3; letter-spacing: -1.4px; font-weight: 400; margin-top: 20px; }

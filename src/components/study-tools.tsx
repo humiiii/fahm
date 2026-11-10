@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from 'motion/react';
 import { ArrowRight, ArrowUpRight, BookOpen, Check, Copy, FileText, Languages, ScanText, X } from 'lucide-react';
 import { sources } from '@/lib/content';
 import type { LivePassage, PassageVerse, PassageWord } from '@/lib/quran/passage';
+import { HadithDetail } from './hadith-detail';
 
 type Detail = { kind: 'word'; location: string } | { kind: 'source'; id: string } | { kind: 'context'; verseKey?: string };
 const DetailContext = createContext<{ open: (detail: Detail) => void; chapter?: LivePassage }>({ open: () => {} });
@@ -55,10 +56,10 @@ export function DetailProvider({ children, chapter }: { children: ReactNode; cha
         {source && <>
           <span className="detail-source-kind"><FileText size={15} />{source.kind}</span><h2 id="detail-title">{publishedCommentary?.name ?? source.title}</h2>
           <p className="source-credit">{publishedCommentary ? `${publishedCommentary.author} · Ash-Sharh 94:1–8 · Quran Foundation` : source.id === 'ash-sharh' && chapter ? `${chapter.translation.name} · Quran Foundation` : source.credit}</p>
-          {publishedCommentary ? <div className="publisher-content" translate="no" dangerouslySetInnerHTML={{ __html: publishedCommentary.html }} /> : <p className="detail-note">{source.description}</p>}
+          {source.id === 'muslim-2999' ? <HadithDetail /> : publishedCommentary ? <div className="publisher-content" translate="no" dangerouslySetInnerHTML={{ __html: publishedCommentary.html }} /> : <p className="detail-note">{source.description}</p>}
           {source.id === 'ash-sharh' && chapter && <button className="detail-switch text-link" onClick={() => setDetail({ kind: 'context' })}>Read the complete surah here<ArrowRight size={15} /></button>}
-          {!publishedCommentary && <div className="detail-source"><span className="eyebrow">SOURCE AND CONTEXT</span><p>{source.kind === 'Hadith' ? 'This card contains an editorial summary. The complete narration and its translation are available at the original source.' : 'Topic selection and editorial introductions are awaiting review. Quran text, translations, and commentary are supplied by Quran Foundation.'}</p></div>}
-          <a className="button-primary source-open" href={source.href} target="_blank" rel="noreferrer">Open original source<ArrowUpRight size={16} /></a><p className="detail-footnote">Opens in a new tab. Your place here is preserved.</p>
+          {!publishedCommentary && <div className="detail-source"><span className="eyebrow">SOURCE AND CONTEXT</span><p>{source.kind === 'Hadith' ? 'The narration and explanation are provided by HadeethEnc.com. Its relationship to this topic is an editorial choice awaiting review. The collection reference below opens Sunnah.com, which uses its own translation.' : 'Topic selection and editorial introductions are awaiting review. Quran text, translations, and commentary are supplied by Quran Foundation.'}</p></div>}
+          <a className="button-primary source-open" href={source.href} target="_blank" rel="noreferrer">{source.id === 'muslim-2999' ? 'Open collection reference' : 'Open original source'}<ArrowUpRight size={16} /></a><p className="detail-footnote">Opens in a new tab. Your place here is preserved.</p>
         </>}
         {detail.kind === 'context' && chapter && <>
           <span className="detail-source-kind"><BookOpen size={15} />Quran · Chapter 94</span><h2 id="detail-title">The whole surah, together.</h2>
@@ -135,7 +136,7 @@ export function ReferenceCard({ id }: { id: string }) {
   const { open, chapter } = useContext(DetailContext);
   if (!source) return null;
   const commentary = id === 'ibn-kathir' ? chapter?.commentary : null;
-  return <button className="reference-card" onClick={() => open({ kind: 'source', id })}><div className="reference-card-top"><span className="eyebrow">{source.kind}</span><ArrowUpRight size={18} /></div><h3>{commentary?.name ?? source.title}</h3><p>{source.description}</p><span className="reference-credit">{commentary ? `${commentary.author} · Quran Foundation` : source.credit}</span><span className="reference-action">{commentary ? 'Read published commentary' : 'Inspect reference'}<ArrowRight size={14} /></span></button>;
+  return <button className="reference-card" onClick={() => open({ kind: 'source', id })}><div className="reference-card-top"><span className="eyebrow">{source.kind}</span><ArrowUpRight size={18} /></div><h3>{commentary?.name ?? source.title}</h3><p>{source.description}</p><span className="reference-credit">{commentary ? `${commentary.author} · Quran Foundation` : source.credit}</span><span className="reference-action">{id === 'muslim-2999' ? 'Read the complete hadith' : commentary ? 'Read published commentary' : 'Inspect reference'}<ArrowRight size={14} /></span></button>;
 }
 export function RelatedTopicLink({ id, reason }: { id: string; reason: string }) {
   const label = id === 'patience' ? 'Patience' : id === 'gratitude' ? 'Gratitude' : 'Hardship & ease';
