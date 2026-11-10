@@ -406,3 +406,10 @@ This brief is the implementation starting point. It records the current directio
 ## Implementation update — 9 November 2026
 
 The local app includes Explore, fuzzy topic search and filters, a live Hardship & ease experience, shorter Patience and Gratitude pages, Sources and About pages, light/dark themes, and responsive layouts. Production Quran Foundation access supplies Ash-Sharh Arabic, Saheeh International translation, 27 contextual words, translator notes, and published Ibn Kathir commentary. The reader and context panel include all eight verses. Native dialogs, credited copying, text size controls, loading, and provider failure/retry recovery have been verified. Editorial introductions and thematic connections remain drafts, and the hadith card remains an attributed summary linking to its original source. All-chapter navigation, audio, scholarly sign-off, and public deployment remain future work.
+
+
+## Completion update - 10 November 2026
+
+Hardship & ease now includes a full Sahih Muslim 2999 reading panel: live Arabic, English translation, publisher grading, explanation, four notes, bibliography, edition attribution, credited copying, and independent loading/retry behavior. HadeethEnc.com record 3298 supplies this material through its public API; the English and Arabic records and collection number are validated together. Quran Foundation remains the Quran, word, translation-note, and tafsir provider. Source credentials stay server-side. No account, saving step, or database is required.
+
+Engineering completion does not imply scholarly approval. Introductions and thematic connections await qualified review; a five-person usability study has not been run. Patience and Gratitude remain short reference-led drafts. The concrete review and usability tasks are in `docs/HARDSHIP_REVIEW.md`; the one-page workflow is in `output/pdf/Fahm-workflow.pdf`.
