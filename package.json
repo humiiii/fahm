@@ -8,7 +8,8 @@
     "start": "next start --hostname 127.0.0.1 --port 3087",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test tests/*.test.ts",
-    "quran:check": "node --conditions=react-server --import tsx scripts/check-quran.ts"
+    "quran:check": "node --conditions=react-server --import tsx scripts/check-quran.ts",
+    "hadith:check": "node --conditions=react-server --import tsx scripts/check-hadith.ts"
   },
   "dependencies": {
     "@fontsource/amiri-quran": "5.3.0",
